@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'Java'}
-    options {
-        rateLimitBuilds([count: 6, durationName: 'hour', userBoost: false])
+      options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '5')
     }
     triggers {
         cron 'H H/3 * * *'
