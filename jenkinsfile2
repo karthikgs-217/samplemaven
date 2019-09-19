@@ -9,11 +9,9 @@ pipeline {
     }
     stages {
         stage("SCM chkout") {
-            parallel {
-                
-            }
             steps {
                 git 'https://github.com/karthikgs-217/samplemaven'
+                
             }
         }
         stage("maven build") {
