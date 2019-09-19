@@ -1,0 +1,25 @@
+pipeline {
+    agent {label 'Java'}
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '5')
+        rateLimitB  uilds([count: 6, durationName: 'hour', userBoost: false])
+    }
+    triggers {
+        cron 'H H/3 * * *'
+    }
+    stages {
+        stage("SCM chkout") {
+            parallel {
+                
+            }
+            steps {
+                git 'https://github.com/karthikgs-217/samplemaven'
+            }
+        }
+        stage("maven build") {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+}
